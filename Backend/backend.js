@@ -118,19 +118,22 @@ app.post('/ertekeleskeresjatek', (req, res) => {
         return res.status(200).json(result)
         })
 })
-//
-app.put('/jatekTorles/:jatek_id', (req, res) => {
-        const {jatek_id} =req.params
-        const sql=`delete from jatek where jatek_id=?`
-        pool.query(sql,[jatek_id], (err, result) => {
+//post jatekkeres
+app.get('/jatekegy/:jatek_id', (req, res) => {
+    const {jatek_id} = req.params;
+    const sql = `select *
+                from jatek
+                inner join tipus
+                on jatek_tipus=tipus_id
+                where jatek_id=?`;
+    pool.query(sql, [jatek_id], (err,result) => {
         if (err) {
-            console.log(err)
-            return res.status(500).json({error:"Hiba"})
+            console.error(err);
+            return res.status(500).json({ error: "Adatbázis hiba" });
         }
-       
-        return res.status(200).json({message:"Sikeres törlés"})
-        })
-})
+        res.json(result);
+    });
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
