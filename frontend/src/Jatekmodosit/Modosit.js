@@ -7,6 +7,7 @@ const Modosit = ({ kivalasztott, setkivalasztott }) => {
   const [hiba, setHiba] = useState(false);
   const [egyjatek, setegyjatek] = useState(null);
   const Adatmodosit = async (e) => {
+    e.preventDefault();
     try {   
         const response = await fetch(Cim.Cim + "/jatekmodosit/" + kivalasztott, {
             method: "PUT",
