@@ -134,6 +134,21 @@ app.get('/jatekegy/:jatek_id', (req, res) => {
         res.json(result);
     });
 });
+//jatekok modositasa jatek_ertekeles = ?, jatek_ar = ?, jatek_leiras = ?, jatek_tipus = ? [, jatek_ertekeles, jatek_ar, jatek_leiras, jatek_tipus, jatek_id]
+app.put('/jatekmodosit/:jatek_id', (req, res) => {
+    const {jatek_id} = req.params;
+    const {jatek_nev} = req.body;
+    const sql = `UPDATE jatek
+                 SET jatek_nev = ?
+                 WHERE jatek_id = ?`;
+    pool.query(sql, [jatek_nev, jatek_id], (err) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: "Adatbázis hiba" });
+        }
+        res.json({ message: "Sikeres módosítás!" });
+    });
+});
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
