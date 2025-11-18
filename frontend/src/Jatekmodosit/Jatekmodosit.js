@@ -5,7 +5,7 @@ import Modosit from "./Modosit";
 const Jatekmodosit = () => {
   const [kivalasztott, setkivalasztott] = useState(1);
   const [talalat, settalalat] = useState(null);
-  
+  const [siker,setSiker]=useState(" ")
   const keres = () => {
     //alert("Kiválasztott játék id: " + kivalasztott);
     settalalat(kivalasztott);
@@ -20,6 +20,7 @@ const Jatekmodosit = () => {
       />
       <button className="btn btn-primary" style={{marginTop:"10px"}} onClick={()=>keres()} >Játék keresése</button>
       {talalat && <Modosit kivalasztott={kivalasztott} />}
+     
     </div>
   );
 }
