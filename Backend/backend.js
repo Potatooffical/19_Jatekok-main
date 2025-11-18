@@ -146,7 +146,7 @@ app.put('/jatekmodosit/:jatek_id', (req, res) => {
             console.error(err);
             return res.status(500).json({ error: "Adatbázis hiba" });
         }
-        res.json({ message: "Sikeres módosítás!" });
+         return res.json({ message: "Sikeres módosítás!" });
     });
 });
 app.listen(port, () => {
