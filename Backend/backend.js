@@ -137,11 +137,11 @@ app.get('/jatekegy/:jatek_id', (req, res) => {
 //jatekok modositasa jatek_ertekeles = ?, jatek_ar = ?, jatek_leiras = ?, jatek_tipus = ? [, jatek_ertekeles, jatek_ar, jatek_leiras, jatek_tipus, jatek_id]
 app.put('/jatekmodosit/:jatek_id', (req, res) => {
     const {jatek_id} = req.params;
-    const {jatek_nev} = req.body;
-    const sql = `UPDATE jatek
-                 SET jatek_nev = ?
-                 WHERE jatek_id = ?`;
-    pool.query(sql, [jatek_nev, jatek_id], (err) => {
+    const {jatek_nev,jatek_ertekeles,jatek_ar,jatek_leiras,jatek_tipus} = req.body;
+    const sql = `update jatek 
+                 set jatek_nev=?,jatek_ertekeles=?,jatek_ar=?,jatek_leiras=?,jatek_tipus=?
+                 where jatek_id=?`;
+    pool.query(sql, [jatek_nev, jatek_ertekeles, jatek_ar, jatek_leiras, jatek_tipus,jatek_id], (err) => {
         if (err) {
             console.error(err);
             return res.status(500).json({ error: "Adatbázis hiba" });

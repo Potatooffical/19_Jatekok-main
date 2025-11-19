@@ -16,10 +16,13 @@ const Modosit=({kivalasztott})=>{
     //adatok módosítása- jatekModosit backend végpont hívása
     const adatModosit=async (e)=>{
         e.preventDefault()
-
+//jatek_nev,jatek_ertekeles,jatek_ar,jatek_leiras,jatek_tipus
         const bemenet={
-            "jatek_nev":egyJatek.jatek_nev
-
+            "jatek_nev":egyJatek.jatek_nev,
+            "jatek_ertekeles":egyJatek.jatek_ertekeles,
+            "jatek_ar":egyJatek.jatek_ar,
+            "jatek_leiras":egyJatek.jatek_leiras,
+            "jatek_tipus":egyJatek.jatek_tipus
         }
         try{
         const response=await fetch(Cim.Cim+"/jatekModosit/"+kivalasztott,{
@@ -34,7 +37,6 @@ const Modosit=({kivalasztott})=>{
         if (response.ok){
             setSiker(data["message"])
             setHelyes(true)
-
            }
         else{
             setSiker(data["error"])
@@ -90,16 +92,45 @@ const Modosit=({kivalasztott})=>{
     
     else return (
         <div className="modositDoboz">
-
             <form onSubmit={adatModosit}>
             <div>
-             <div style={{marginBottom:"10px",fontWeight:"bold"}}>Játék módosítása</div>   
+             <div style={{marginBottom:"10px",fontWeight:"bold"}}>Játék módosítása</div>      
+             <p></p>
              <span>Játék neve: </span>
              <input 
                 type="text" 
                 value={egyJatek.jatek_nev}
                 onChange={(e)=>setEgyJatek({...egyJatek,jatek_nev:e.target.value})}
              />
+             <p></p>
+             <span>Játék értékelés:</span>
+             <input 
+                type="text" 
+                value={egyJatek.jatek_ertekeles}
+                onChange={(e)=>setEgyJatek({...egyJatek,jatek_ertekeles:e.target.value})}
+             />
+             <p></p>
+             <span>Játék ára:</span>
+             <input 
+                type="text" 
+                value={egyJatek.jatek_ar}
+                onChange={(e)=>setEgyJatek({...egyJatek,jatek_ar:e.target.value})}
+             />
+             <p></p>
+             <span>Játék leirás:</span>
+             <textarea
+                type="text" 
+                value={egyJatek.jatek_leiras}
+                onChange={(e)=>setEgyJatek({...egyJatek,jatek_leiras:e.target.value})}
+             />
+             <p></p>
+             <span>Játék tipusa:</span>
+             <input 
+                type="text" 
+                value={egyJatek.jatek_tipus}
+                onChange={(e)=>setEgyJatek({...egyJatek,jatek_tipus:e.target.value})}
+             /> 
+             
              </div>
              <div>
              <button
